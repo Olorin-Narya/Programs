@@ -1,0 +1,51 @@
+uhull github
+
+//nos computadores da udesc 
+git config --global user.name 'nome do git '
+git config --global user.email 'email do git '' 
+
+git clone http.....
+//baixar o arquivo ..
+git add arquivo.txt
+//adicionar o arquivo 
+git commit -m 'sadsas'
+//falar oq vc esta mandando
+git push 
+//enviar o arquivo
+
+
+git status
+//mostra os arquivos q vc esta deletando ou fazendo upload
+
+git add -u
+//atualizar as modificacoes (update e delete).
+
+git rm nomedoarquivo.txt
+//deletar um arquivo
+git commit -m 'precisa escrever para deletar tbm'
+//
+git push
+//para deletar tbm
+
+git checkout -b developing
+//branch dev criada
+git push --set-upstream origin developing
+//criar a nova branch (developing) no repositorio remoto
+
+para criar um repositorio direto no computador
+criar a pasta mkdir pastanova
+cd pastanova 
+git init
+
+//para criar um repositorio no computador
+echo "# gifS" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/h31nr1ch/gifS.git
+git push -u origin master
+
+
+https://education.github.com/git-cheat-sheet-education.pdf
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+Fork de h31nr1ch
