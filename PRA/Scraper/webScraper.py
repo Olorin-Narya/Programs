@@ -1,13 +1,19 @@
 import requests
+
 endereco = "http://www.yahii.com.br/dolardiario"
 tabela = range(2018-1985)
 for i in range(1985,2018):
+    
     print (str(i)[2:])
+    
     tabela[i-1985-1] = range(12)
+    
     endfinal = endereco + str(i)[2:] + ".html"
     page = requests.get(endfinal)
+    
     for j in range(1,13):
         tabela[i-1985-1][j-1] = range(31)
+        
         for h in range(1,32):
             tabela[i-1985-1][j-1][h-1] = range(2)
 
