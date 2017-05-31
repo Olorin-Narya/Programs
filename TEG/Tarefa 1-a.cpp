@@ -198,10 +198,10 @@ int main(){
 
     printf("O grafo eh direcionada? 1= SIM\n");
     scanf("%i", &resposta);
+    int **matriz=NULL;
+    int **matrizInc=NULL;
     if(resposta==1){
         do{
-            int **matriz=NULL;
-            int **matrizInc=NULL;
             printf("\n1.Mostra Matrizes\n2.Grau do No\n3. Exclui Vertice\n4. Insere Vertice\n0. Sair\n");
             printf("Opcao: ");
             scanf("\n%i",&escolha);
@@ -238,8 +238,6 @@ int main(){
         }while(escolha!=0);
     }else{
         do{
-            int **matriz=NULL;
-            int **matrizInc=NULL;
             printf("\n1.Mostra Matrizes\n2.Grau do No\n3. Exclui Vertice\n4. Insere Vertice\n0. Sair\n");
             printf("Opcao: ");
             scanf("%i",&escolha);
@@ -277,5 +275,3 @@ int main(){
     }
     return 0;
 }
-
-
