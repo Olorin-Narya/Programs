@@ -7,11 +7,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
 void criaMatriz(int ***matriz, int ***matrizInc, int *tamanho,int *numAresta){
     int i, j, origem, destino, vertices,aresta=0;
     *numAresta=0;
-    printf("Digite a quantidade de vertices:\n");
+    printf("Digite á quantidade de vertices:\n");
     scanf("%i",&vertices);
     *tamanho=vertices;
 
@@ -81,13 +82,13 @@ void GrauNaoDirecionado(int **matriz, int tamanho){
             cont+=matriz[no-1][j];
         }
     }
-    printf("O grau do no %i eh: %i\n", no, cont);
+    printf("O grau do nó %i é: %i\n", no, cont);
 }
 
 void GrauDirecionado(int **matriz, int tamanho){
     int no, i, j, cont=0, cont2=0;
 
-    printf("Digite o no: \n");
+    printf("Digite o nó: \n");
     scanf("%i", &no);
     for(j=0;j<tamanho;j++){
         if (matriz[no-1][j]!=0){
@@ -99,7 +100,7 @@ void GrauDirecionado(int **matriz, int tamanho){
             cont2+=matriz[i][no-1];
         }
     }
-    printf("O grau do no %i eh: %i\n", no, cont+cont2);
+    printf("O grau do nó %i é: %i\n", no, cont+cont2);
 }
 
 void IncidenciaNaoDirecionada(int ***matrizInc ){
@@ -139,7 +140,7 @@ void IncidenciaDirecionada(int ***matrizInc){
 
 void ExcluiVertice(int** matriz, int* tamanho, int* numAresta) {
     int vertice, j=0, x, y, relacionamento;
-    printf("Digite o vertice que deseja excluir: \n");
+    printf("Digite o vértice que deseja excluir: \n");
     scanf("%i", &vertice);
 
     FILE *p= fopen("oi.txt","rw");
@@ -196,14 +197,15 @@ int main(){
 
     int tamanho, escolha, resposta, numAresta=0;
 
-    printf("O grafo eh direcionada? 1= SIM\n");
+    setlocale(LC_ALL, "");
+    printf("O grafo é direcionado? 1= SIM\n");
     scanf("%i", &resposta);
     int **matriz=NULL;
     int **matrizInc=NULL;
     if(resposta==1){
         do{
-            printf("\n1.Mostra Matrizes\n2.Grau do No\n3. Exclui Vertice\n4. Insere Vertice\n0. Sair\n");
-            printf("Opcao: ");
+            printf("\n1.Mostra Matrizes\n2.Graú do Nó\n3. Excluir Vértice\n4. Insere Vértice\n0. Sair\n");
+            printf("Opção: ");
             scanf("\n%i",&escolha);
 
             switch(escolha){
@@ -215,7 +217,7 @@ int main(){
 
                     printf("Matriz Adjacente: \n");
                     MostraAdjacencia(matriz, tamanho);
-                    printf("Matriz Incidencia: \n");
+                    printf("Matriz Incidência: \n");
                     MostraIncidencia(matrizInc, tamanho, numAresta);
 
                 break;
@@ -234,11 +236,11 @@ int main(){
                 default:
                 return 0;
                 break;
-          }
+            }
         }while(escolha!=0);
     }else{
         do{
-            printf("\n1.Mostra Matrizes\n2.Grau do No\n3. Exclui Vertice\n4. Insere Vertice\n0. Sair\n");
+            printf("\n1.Mostra Matrizes\n2.Grau do Nó\n3. Exclui Vértice\n4. Insere Vértice\n0. Sair\n");
             printf("Opcao: ");
             scanf("%i",&escolha);
 
