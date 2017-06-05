@@ -236,14 +236,13 @@ int main(){
     int **matriz=NULL;
     int **matrizInc=NULL;
 
-    setlocale(LC_ALL,"Portuguese");
-    setlocale(LC_ALL,"pt_BR.UTF-8");
-
-    printf("O grafo eh direcionado? 1= SIM\n");
+    setlocale(LC_ALL,"");
+    
+    printf("O grafo é direcionado? 1= SIM\n");
     scanf("%i", &resposta);
     if(resposta==1){
         do{
-            printf("\n1.Mostra Matrizes \n2.Grau do No\n3. Exclui Vertice\n4. Mostra Matriz Complemento\n5. Conexividade\n0. Sair\n");
+            printf("\n1.Mostra Matrizes\n2.Grau do Nó\n3. Excluir Vértice\n4. Mostra Matriz Complemento\n5. Conexividade\n0. Sair\n");
             printf("Opcao: ");
             scanf("\n%i",&escolha);
 
@@ -283,8 +282,8 @@ int main(){
         } while(escolha!=0);
     } else {
         do{
-            printf("\n1.Mostra Matrizes  \n2.Grau do No\n3. Exclui Vertice\n4. Mostra Matriz Complemento\n5. Insere Vertice\n6. Conexividade\n0. Sair\n");
-            printf("Opcao: ");
+            printf("\n1.Mostra Matrizes\n2.Grau do Nó\n3. Excluir Vértice\n4. Mostra Matriz Complemento\n5. Insere Vértice\n6. Conexividade\n0. Sair\n");
+            printf("Opção: ");
             scanf("%i",&escolha);
 
             switch(escolha){
