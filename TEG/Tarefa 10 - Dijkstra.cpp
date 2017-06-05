@@ -34,15 +34,15 @@ void Dijkstra(int inicio, int vertices){
    marcados[inicio]=1;
 
 
-   for(i=1;i<vertices;i++){
-     marcados[i]=0;
-    if(matriz[inicio][i]==0){
-      dist[i]=1000; //INF
+    for (i=1;i<vertices;i++){
+        marcados[i]=0;
+        if (matriz[inicio][i]==0){
+            dist[i]=1000; //INF
+        }
+        else {
+            dist[i]=matriz[inicio][i];
+        }
     }
-    else{
-      dist[i]=matriz[inicio][i];
-  }
-   }
 
    /*
    for(i=0;i<vertices;i++){
@@ -52,28 +52,29 @@ void Dijkstra(int inicio, int vertices){
 
     while(menor(vertices)!=-1){
 
-     atual=menor(vertices);
+        atual=menor(vertices);
         //printf("EM %d:\n",atual);
-     marcados[atual]=1;
-     for(i=0;i<vertices;i++){
-      //printf("DIST[%d]: %d\n DITANCIA RELATIVA[%d]: %d\n",i,dist[i],i,dist[atual]+matriz[atual][i]);
-      if(matriz[atual][i]!=0 && marcados[i]==0){
-       if(dist[atual]+matriz[atual][i]<dist[i]) {
-        dist[i]=dist[atual]+matriz[atual][i];
-      }
-   }
-     }
-  for(i=0;i<vertices;i++){
-     printf("DIST[%d]= %d\n",i,dist[i]);
-     }
-   }
+        marcados[atual]=1;
+
+        for(i=0;i<vertices;i++){
+            //printf("DIST[%d]: %d\n DITANCIA RELATIVA[%d]: %d\n",i,dist[i],i,dist[atual]+matriz[atual][i]);
+            if(matriz[atual][i]!=0 && marcados[i]==0){
+                if(dist[atual]+matriz[atual][i]<dist[i]) {
+                    dist[i]=dist[atual]+matriz[atual][i];
+                }
+            }
+        }
+        for(i=0;i<vertices;i++){
+            printf("DIST[%d]= %d\n",i,dist[i]);
+        }
+    }
 }
 
 int main()
 {
     int i,j, valor;
     int inicio=0, prox=0, vertices;
-    
+
     setlocale(LC_ALL,"");
 
     printf("Digite a quantidade de vertices?\n");

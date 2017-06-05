@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
 void criaMatriz(int ***matriz, int ***matrizModificada , int *tamanho,int *numAresta){
     int i, j, origem, destino, vertices,aresta=0;
-
     *numAresta=0;
-    printf("Digite a quantidade de vertices:\n");
+    printf("Digite a quantidade de vértices:\n");
     scanf("%i",&vertices);
     *tamanho=vertices;
 
@@ -21,27 +21,22 @@ void criaMatriz(int ***matriz, int ***matrizModificada , int *tamanho,int *numAr
             (*matrizModificada)[i][j]=0; //inicializa adjacencia
         }
     }
-
     while(fscanf(p, "%i %i %i #", &origem, &destino, &aresta)!=EOF){
         *numAresta=(*numAresta)+(aresta);// conta numero de arestas para matriz incidencia
         printf("aresta: %i \n", *numAresta);
     }
-     printf("\nNumero de Arestas:%i \n \n", *numAresta);
-
+    printf("\nNúmero de Arestas:%i \n \n", *numAresta);
     fclose(p);
 }
 
 void IncidenciaNaoDirecionada(int ***matrizInc ){
     int destino, origem,  arestas, i=0, j;
-
     FILE *a= fopen("oi.txt","r");
-
     while(fscanf(a, "%i %i  %i \n ", &origem, &destino, &arestas)!= EOF){
         (*matrizInc)[i][origem-1]= 1;
         (*matrizInc)[i][destino-1]= 1;
         i++;
     }
-
     fclose(a);
 }
 
@@ -54,20 +49,19 @@ void MostraIncidencia(int **matrizInc, int tamanho, int numAresta){
             printf("%d ",matrizInc[i][j]);
         }printf("\n");
     }
-
 }
 
 void GrauNaoDirecionado(int **matriz, int tamanho){
     int no, i, j, cont=0;
 
-    printf("Digite o no: \n"); //mostra grau de no que o usuario digita
+    printf("Digite o nó: \n"); //mostra grau de no que o usuario digita
     scanf("%i", &no);
         for(j=0;j<tamanho;j++){
             if (matriz[no-1][j]!=0){ //no caso, nao eh direcionado, entao conta apenas a linha ou so coluna pois matriz eh simetrica
                 cont+=matriz[no-1][j];
             }
         }
-    printf("O grau do no %i eh: %i\n", no, cont);
+    printf("O grau do nó %i é: %i\n", no, cont);
 }
 
 void NaoDirecionada(int ***matriz){
@@ -79,6 +73,7 @@ void NaoDirecionada(int ***matriz){
     }
     fclose(p);
 }
+
 void MostraAdjacencia(int **matriz, int tamanho){
     int i, j;
     for(i=0;i<tamanho;i++){         //percorre matriz e mostra
@@ -89,7 +84,6 @@ void MostraAdjacencia(int **matriz, int tamanho){
 
         }printf("\n");
     }
-
 }
 
 int ParenteNo(int **matriz, int tamanho, int direcao, int pesquisaNo){
@@ -102,7 +96,7 @@ int ParenteNo(int **matriz, int tamanho, int direcao, int pesquisaNo){
     printf("Digite a raiz:\n");
     scanf("%i",&no);
 
-    visto[no-1]++; //raiz da arvore ja vai marcada, j� que comecamos por ela
+    visto[no-1]++; //raiz da arvore ja vai marcada, j� que comecamos por ela
     printf(" %i |", no);
     ProcuraNo(matriz, no-1, tamanho, visto, direcao, pesquisaNo);
 }
@@ -135,43 +129,39 @@ int main()
     int **matrizModificada=NULL;
     int **matriz=NULL;
 
+    setlocale(LC_ALL, "");
 
-    //printf("\noi\n\n");
+    do{
+        printf("\n1.Mostra Matriz \n2.Árvore\n3.Pesquisa\n0. Sair\n");
+        printf("Opção: ");
+        scanf("\n%i",&escolha);
 
+        switch(escolha){
+            case 1:
+                criaMatriz(&matriz, &matrizModificada,&tamanho, &numAresta);
 
-        do{
-            printf("\n1.Mostra Matriz \n2.Arvore\n3.Pesquisa\n0. Sair\n");
-            printf("Opcao: ");
-            scanf("\n%i",&escolha);
+                NaoDirecionada(&matriz);
+                NaoDirecionada(&matrizModificada);
 
-            switch(escolha){
-                case 1:
-                    criaMatriz(&matriz, &matrizModificada,&tamanho, &numAresta);
+                printf("Matriz Adjacente: \n");
+                MostraAdjacencia(matriz, tamanho); printf("\n");
+                MostraAdjacencia(matrizModificada, tamanho);
+            break;
+            case 2:
+                ParenteNo(matriz, tamanho, 1);
+            break;
+            case 3:
+                printf("Digite o ná à pesquisar");
+                scanf("%i",&pesquisaNo);
 
-                    NaoDirecionada(&matriz);
-                    NaoDirecionada(&matrizModificada);
-
-                    printf("Matriz Adjacente: \n");
-                    MostraAdjacencia(matriz, tamanho); printf("\n");
-                    MostraAdjacencia(matrizModificada, tamanho);
-                break;
-                case 2:
-                    ParenteNo(matriz, tamanho, 1);
-                break;
-                case 3:
-                    printf("Digite o no a pesquisar");
-                    scanf("%i",&pesquisaNo);
-
-                    printf("1  = filhos\n-1 = pais\n");
-                    scanf("%i",&direcao);
-                    ParenteNo(matriz,tamanho,direcao,pesquisaNo);
-                break;
-
-                default:
+                printf("1  = filhos\n-1 = pais\n");
+                scanf("%i",&direcao);
+                ParenteNo(matriz,tamanho,direcao,pesquisaNo);
+            break;
+            default:
                 return 0;
-                break;
-          }
-        }while(escolha!=0);
-
+            break;
+        }
+    }while(escolha!=0);
     return 0;
 }

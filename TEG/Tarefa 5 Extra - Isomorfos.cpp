@@ -7,13 +7,12 @@ void criaMatrizUm(int ***matrizUm, int *tamanhoUm,int *numArestaUm){
     int i, j, origem, destino, relacionamento, verticesUm, x,y;
 
     *numArestaUm=0;
-    printf("Digite a quantidade de vertices:  ");
+    printf("Digite a quantidade de vértices:  ");
     scanf("%i",&verticesUm);
     *tamanhoUm=verticesUm;
     printf("\n");
 
     FILE *p=fopen("oi1.txt", "r+");
-    //abre arquivo
 
     *matrizUm=(int**)malloc(*tamanhoUm * sizeof(int*));
 
@@ -31,12 +30,12 @@ void criaMatrizUm(int ***matrizUm, int *tamanhoUm,int *numArestaUm){
         printf("aresta: %i \n", *numArestaUm);
     }
 
-    printf("\nNumero de Arestas Matriz Um:%i \n \n", *numArestaUm);
+    printf("\nNúmero de Arestas Matriz Um:%i \n \n", *numArestaUm);
 
     for(i=0;i<*tamanhoUm;i++){ //percorre matriz e mostra
         for(j=0;j<*tamanhoUm;j++){
             if((*matrizUm)[i][j]!= -10){
-                 printf("%i ",(*matrizUm)[i][j]);
+                printf("%i ",(*matrizUm)[i][j]);
             }
         }
         printf("\n");
@@ -48,7 +47,7 @@ void criaMatrizDois(int ***matrizDois, int *tamanhoDois,int *numArestaDois){
     int i, j, origem, destino, verticesDois, relacionamento;
 
     *numArestaDois=0; //conta  numero de arestas a partir do numero de relacionamento enviado no arquivo txt 3 coluna
-    printf("\nDigite a quantidade de vertices:  ");
+    printf("\nDigite a quantidade de vértices:  ");
     scanf("%i",&verticesDois);
     *tamanhoDois=verticesDois;
     printf("\n");
@@ -63,7 +62,6 @@ void criaMatrizDois(int ***matrizDois, int *tamanhoDois,int *numArestaDois){
             (*matrizDois)[i][j]=0; //inicializa adjacencia
         }
     }
-
     while(fscanf(p, "%i %i %i", &origem, &destino, &relacionamento)!=EOF){ //mesmo que a anterior porem quando o grafo for direcionado
         (*matrizDois)[origem-1][destino-1]= relacionamento;
         (*matrizDois)[destino-1][origem-1]= relacionamento;
@@ -71,19 +69,18 @@ void criaMatrizDois(int ***matrizDois, int *tamanhoDois,int *numArestaDois){
         printf("aresta: %i \n", *numArestaDois);
     }
 
-    printf("\nNumero de Arestas Matriz Dois:%i \n \n", *numArestaDois);
+    printf("\nNúmero de Arestas Matriz Dois:%i \n \n", *numArestaDois);
 
     for(i=0;i<*tamanhoDois;i++){ //percorre matriz e mostra
-       for(j=0;j<*tamanhoDois;j++){
-           if((*matrizDois)[i][j]!= -10){
+        for(j=0;j<*tamanhoDois;j++){
+            if((*matrizDois)[i][j]!= -10){
                 printf("%i ",(*matrizDois)[i][j]);
-           }
+            }
         }
         printf("\n");
     }
     fclose(p);
 }
-
 
 //grava cada grau respectivamente com seu vertice num vetor
 void GrauUm(int **matrizUm, int tamanhoUm, int *grauUm){
@@ -96,7 +93,7 @@ void GrauUm(int **matrizUm, int tamanhoUm, int *grauUm){
                 grauUm[i]=cont;
             }
         }
-        printf("O grau do no %i eh: %i\n", i+1, cont);
+        printf("O grau do nó %i eh: %i\n", i+1, cont);
         cont=0;
     }
     for(i=0;i<tamanhoUm;i++){
@@ -105,10 +102,7 @@ void GrauUm(int **matrizUm, int tamanhoUm, int *grauUm){
     printf("\n");
 }
 
-
-
 void GrauDois(int **matrizDois, int tamanhoDois, int *grauDois){
-
     int i, j, cont=0;
     printf("\nMatriz Dois: \n");
     for(i=0;i<tamanhoDois;i++){
@@ -131,23 +125,20 @@ void GrauDois(int **matrizDois, int tamanhoDois, int *grauDois){
 //se forem todos iguais ao outros, isomorfo alem da condicao de vertices e arestas
 void ComparaMatrizes(int *grauUm, int *grauDois, int tamanho){
     int visto[tamanho], i, j, combi = 0;
-
     for (i = 0; i < tamanho; i++) {
         visto[i] = 0;
     }
-
     for(i = 0; i < tamanho; i++) {
         for(j = 0; j < tamanho; j++) {
             if (!(visto[j])) {
                 if (grauUm[i] == grauDois[j]) {
                     visto[j] = 1;
                     combi++;
-                    break;                              //começo o for novamente...
+                    break;               //começo o for novamente...
                 }
             }
         }
     }
-
     if (combi == tamanho) {
         printf("São isomorfos!\n");
     }
@@ -156,15 +147,13 @@ void ComparaMatrizes(int *grauUm, int *grauDois, int tamanho){
     }
 }
 
-
 int main()
 {
-
     int ***matrizUm=NULL, ***matrizDois=NULL;
     int tamanhoUm, tamanhoDois, numArestaUm, numArestaDois, tamanho;
-    
+
     setlocale(LC_ALL,"");
-    
+
     criaMatrizUm(&matrizUm, &tamanhoUm, &numArestaUm);
     criaMatrizDois(&matrizDois, &tamanhoDois, &numArestaDois);
 
@@ -181,4 +170,3 @@ int main()
     }
     return 0;
 }
-
