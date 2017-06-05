@@ -25,37 +25,32 @@ int menor(vertices){
 }
 
 void Dijkstra(int inicio, int vertices){
-   int i,j,atual;
+    int i,j,atual;
 
-   dist=malloc(sizeof(int)*vertices);
-   marcados=malloc(sizeof(int)*vertices);
+    dist=malloc(sizeof(int)*vertices);
+    marcados=malloc(sizeof(int)*vertices);
 
-   dist[inicio]=0;
-   marcados[inicio]=1;
-
+    dist[inicio]=0;
+    marcados[inicio]=1;
 
     for (i=1;i<vertices;i++){
         marcados[i]=0;
         if (matriz[inicio][i]==0){
-            dist[i]=1000; //INF
+            dist[i]=1000;               //Infinito
         }
         else {
             dist[i]=matriz[inicio][i];
         }
     }
-
-   /*
-   for(i=0;i<vertices;i++){
-     printf("DIST[%d]= %d\n",i,dist[i]);
+    /*
+    for(i=0;i<vertices;i++){
+        printf("DIST[%d]= %d\n",i,dist[i]);
     }
- */
-
+    */
     while(menor(vertices)!=-1){
-
         atual=menor(vertices);
         //printf("EM %d:\n",atual);
         marcados[atual]=1;
-
         for(i=0;i<vertices;i++){
             //printf("DIST[%d]: %d\n DITANCIA RELATIVA[%d]: %d\n",i,dist[i],i,dist[atual]+matriz[atual][i]);
             if(matriz[atual][i]!=0 && marcados[i]==0){
@@ -72,35 +67,27 @@ void Dijkstra(int inicio, int vertices){
 
 int main()
 {
-    int i,j, valor;
-    int inicio=0, prox=0, vertices;
-
+    int i,j, valor, inicio=0, prox=0, vertices;
     setlocale(LC_ALL,"");
-
     printf("Digite a quantidade de vertices?\n");
     scanf("%d",&vertices);
-
     printf("Qual o vertice inicial?\n");
     scanf("%d",&inicio);
-
     matriz = malloc(sizeof(int*)*vertices);
+
     for(i=0;i<vertices;i++){
         matriz[i]=malloc(sizeof(int)*vertices);
     }
-
     printf("Digite os valores da matriz para cada posição (0 se não existir): \n");
     for(i=0;i<vertices;i++){
         for(j=0;j<vertices;j++){
             scanf("%d",&matriz[i][j]);
         }
     }
-
     Dijkstra(inicio, vertices);
-
     //printf("IMPRIMINDO O VETOR DE DISTANCIAS  A PARTIR DE %d:\n",inicio);
     for(i=0;i<vertices;i++){
         printf("Distancia[%d]: %d\n",i,dist[i]);
     }
-
     return 0;
 }

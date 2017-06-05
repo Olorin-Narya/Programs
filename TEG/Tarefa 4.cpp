@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
 void criaMatriz(int ***matriz, int ***matrizModificada , int *tamanho,int *numAresta){
     int i, j, origem, destino, vertices,aresta=0;
 
     *numAresta=0;
-    printf("Digite a quantidade de vertices:\n");
+    printf("Digite a quantidade de vértices:\n");
     scanf("%i",&vertices);
     *tamanho=vertices;
 
@@ -21,27 +22,23 @@ void criaMatriz(int ***matriz, int ***matrizModificada , int *tamanho,int *numAr
             (*matrizModificada)[i][j]=0; //inicializa adjacencia
         }
     }
-
     while(fscanf(p, "%i %i %i #", &origem, &destino, &aresta)!=EOF){
         *numAresta=(*numAresta)+(aresta);// conta numero de arestas para matriz incidencia
         printf("aresta: %i \n", *numAresta);
     }
-     printf("\nNumero de Arestas:%i \n \n", *numAresta);
+     printf("\nNúmero de Arestas:%i \n \n", *numAresta);
 
     fclose(p);
 }
 
 void IncidenciaNaoDirecionada(int ***matrizInc ){
     int destino, origem,  arestas, i=0, j;
-
     FILE *a= fopen("oi.txt","r");
-
     while(fscanf(a, "%i %i  %i \n ", &origem, &destino, &arestas)!= EOF){
         (*matrizInc)[i][origem-1]= 1;
         (*matrizInc)[i][destino-1]= 1;
         i++;
     }
-
     fclose(a);
 }
 
@@ -54,20 +51,18 @@ void MostraIncidencia(int **matrizInc, int tamanho, int numAresta){
             printf("%d ",matrizInc[i][j]);
         }printf("\n");
     }
-
 }
 
 void GrauNaoDirecionado(int **matriz, int tamanho){
     int no, i, j, cont=0;
-
-    printf("Digite o no: \n"); //mostra grau de no que o usuario digita
+    printf("Digite o nó: \n"); //mostra grau de no que o usuario digita
     scanf("%i", &no);
         for(j=0;j<tamanho;j++){
             if (matriz[no-1][j]!=0){ //no caso, nao eh direcionado, entao conta apenas a linha ou so coluna pois matriz eh simetrica
                 cont+=matriz[no-1][j];
             }
         }
-    printf("O grau do no %i eh: %i\n", no, cont);
+    printf("O grau do nó %i eh: %i\n", no, cont);
 }
 
 void NaoDirecionada(int ***matriz){
@@ -79,17 +74,29 @@ void NaoDirecionada(int ***matriz){
     }
     fclose(p);
 }
+
 void MostraAdjacencia(int **matriz, int tamanho){
     int i, j;
     for(i=0;i<tamanho;i++){         //percorre matriz e mostra
         for(j=0;j<tamanho;j++){
             if(matriz[i][j]!= -10){
-                 printf("%i ",matriz[i][j]);
+                printf("%i ",matriz[i][j]);
             }
-
         }printf("\n");
     }
+}
 
+void Conexo(int **matriz, int verticeAnalisado, int tamanho, int * visto){
+    int i;
+    for(i = 0; i < tamanho; i++){ //tamanho = qtdVertices
+        if (matriz[verticeAnalisado][i] != 0){
+            if (visto[i] == 0) {
+                visto[i]++;
+                Conexo(matriz, i, tamanho, visto);
+            }
+        }
+        //else ja vi esse vertice, fa�o nada... PROXIMO
+    }
 }
 
 int VerificaConexao(int **matriz, int tamanho){
@@ -99,7 +106,6 @@ int VerificaConexao(int **matriz, int tamanho){
         if (visto[i] == 0){
             componentes++;
             visto[i]++;
-
             Conexo(matriz, i,  tamanho, visto);
         }
     }
@@ -108,20 +114,6 @@ int VerificaConexao(int **matriz, int tamanho){
     }else{
         return 0;
     }
-}
-
-void Conexo(int **matriz, int verticeAnalisado, int tamanho, int visto[tamanho]){ //
-    int i;
-    for(i = 0; i < tamanho; i++){ //tamanho = qtdVertices
-        if (matriz[verticeAnalisado][i] != 0){
-            if (visto[i] == 0) {
-                visto[i]++;
-                Conexo(matriz, i, tamanho, visto);
-            }
-        }
-        //else ja vi esse vertice, fa�o nada... PROXIMO
-    }
-
 }
 
 void Fleury(int **matriz, int **matrizModificada, int numAresta, int tamanho){
@@ -173,14 +165,13 @@ void Fleury(int **matriz, int **matrizModificada, int numAresta, int tamanho){
         //printf("\n");
 
         if (contador > numAresta*tamanho) {
-            printf("Nao ha um caminho Euleriano");
-            return 0;
+            printf("Nao há um circuito Euleriano");
+            return;
         }
     }
-    printf("\nO caminho Euleriano e ");
+    printf("\nO circuito Euleriano é ");
     for (i = 0; i < numAresta+1; i++) {
         printf("%i", ciclo[i]+1);
-
         if (i < numAresta) {
             printf(", aresta%i%i, ", ciclo[i]+1,ciclo[i+1]+1);
         }
@@ -188,52 +179,37 @@ void Fleury(int **matriz, int **matrizModificada, int numAresta, int tamanho){
             printf(".");
         }
     }
-
     printf("\n");
 }
 
 int main()
 {
-    int tamanho, i,j=0, escolha, resposta, origem, destino, numAresta=0, aresta, entra=0, entra2=0;
-
+    int tamanho, escolha, numAresta=0;
     int **matrizInc=NULL;
     int **matrizModificada=NULL;
     int **matriz=NULL;
-
-
-    //printf("\noi\n\n");
-
-
-        do{
-            printf("\n1.Mostra Matriz \n2.Fleury\n0. Sair\n");
-            printf("Opcao: ");
-            scanf("\n%i",&escolha);
-
-            switch(escolha){
-                case 1:
-                    criaMatriz(&matriz, &matrizModificada,&tamanho, &numAresta);
-
-                    NaoDirecionada(&matriz);
-                    NaoDirecionada(&matrizModificada);
-
-                    printf("Matriz Adjacente: \n");
-                    MostraAdjacencia(matriz, tamanho); printf("\n");
-                    MostraAdjacencia(matrizModificada, tamanho);
-
-
-
-                break;
-                case 2:
-
-                    Fleury(matriz, matrizModificada, numAresta, tamanho);
-
-                break;
-
-                default:
+    setlocale(LC_ALL, "");
+    do{
+        printf("\n1.Mostra Matriz \n2.Fleury\n0. Sair\n");
+        printf("Opção: ");
+        scanf("\n%i",&escolha);
+        switch(escolha){
+            case 1: {
+                criaMatriz(&matriz, &matrizModificada,&tamanho, &numAresta);
+                NaoDirecionada(&matriz);
+                NaoDirecionada(&matrizModificada);
+                printf("Matriz Adjacente: \n");
+                MostraAdjacencia(matriz, tamanho); printf("\n");
+                MostraAdjacencia(matrizModificada, tamanho);
+            }
+            break;
+            case 2:
+                Fleury(matriz, matrizModificada, numAresta, tamanho);
+            break;
+            default:
                 return 0;
-                break;
-          }
-        }while(escolha!=0);
-
+            break;
+      }
+    }while(escolha!=0);
     return 0;
 }

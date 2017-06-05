@@ -5,34 +5,28 @@
 //conta  numero de arestas a partir do numero de relacionamento enviado no arquivo txt 3 coluna
 void criaMatrizUm(int ***matrizUm, int *tamanhoUm,int *numArestaUm){
     int i, j, origem, destino, relacionamento, verticesUm, x,y;
-
     *numArestaUm=0;
+    FILE *p=fopen("oi1.txt", "r+");
     printf("Digite a quantidade de vértices:  ");
     scanf("%i",&verticesUm);
     *tamanhoUm=verticesUm;
     printf("\n");
-
-    FILE *p=fopen("oi1.txt", "r+");
-
     *matrizUm=(int**)malloc(*tamanhoUm * sizeof(int*));
 
     for(i=0;i<*tamanhoUm;i++){
-        (*matrizUm)[i]= (int*) malloc(*tamanhoUm*sizeof(int)); //cria matriz de adjacencia
+        (*matrizUm)[i]= (int*) malloc(*tamanhoUm*sizeof(int));                  //cria matriz de adjacencia
         for(j=0;j<*tamanhoUm;j++){
-            (*matrizUm)[i][j]=0; //inicializa adjacencia
+            (*matrizUm)[i][j]=0;                                                //inicializa adjacencia
         }
     }
-
-    while(fscanf(p, "%i %i %i", &origem, &destino, &relacionamento)!=EOF){ //mesmo que a anterior porem quando o grafo for direcionado
+    while(fscanf(p, "%i %i %i", &origem, &destino, &relacionamento)!=EOF){      //mesmo que a anterior porem quando o grafo for direcionado
         (*matrizUm)[origem-1][destino-1]= relacionamento;
         (*matrizUm)[destino-1][origem-1]= relacionamento;
-        *numArestaUm=(*numArestaUm)+(relacionamento);// conta numero de arestas para matriz incidencia
+        *numArestaUm=(*numArestaUm)+(relacionamento);                           //conta numero de arestas para matriz incidencia
         printf("aresta: %i \n", *numArestaUm);
     }
-
     printf("\nNúmero de Arestas Matriz Um:%i \n \n", *numArestaUm);
-
-    for(i=0;i<*tamanhoUm;i++){ //percorre matriz e mostra
+    for(i=0;i<*tamanhoUm;i++){                                                  //percorre matriz e mostra
         for(j=0;j<*tamanhoUm;j++){
             if((*matrizUm)[i][j]!= -10){
                 printf("%i ",(*matrizUm)[i][j]);
@@ -45,33 +39,29 @@ void criaMatrizUm(int ***matrizUm, int *tamanhoUm,int *numArestaUm){
 
 void criaMatrizDois(int ***matrizDois, int *tamanhoDois,int *numArestaDois){
     int i, j, origem, destino, verticesDois, relacionamento;
-
-    *numArestaDois=0; //conta  numero de arestas a partir do numero de relacionamento enviado no arquivo txt 3 coluna
+    FILE *p=fopen("oi2.txt", "r");
+    *numArestaDois=0;                                                           //Número de relacionamentos 3ª coluna
     printf("\nDigite a quantidade de vértices:  ");
     scanf("%i",&verticesDois);
     *tamanhoDois=verticesDois;
     printf("\n");
 
-    FILE *p=fopen("oi2.txt", "r"); //abre arquivo
-
     *matrizDois=(int**)malloc(*tamanhoDois * sizeof(int*));
 
     for(i=0;i<*tamanhoDois;i++){
-        (*matrizDois)[i]= (int*) malloc(*tamanhoDois*sizeof(int)); //cria matriz de adjacencia
+        (*matrizDois)[i]= (int*) malloc(*tamanhoDois*sizeof(int));              //cria matriz de adjacencia
         for(j=0;j<*tamanhoDois;j++){
-            (*matrizDois)[i][j]=0; //inicializa adjacencia
+            (*matrizDois)[i][j]=0;                                              //inicializa adjacencia
         }
     }
-    while(fscanf(p, "%i %i %i", &origem, &destino, &relacionamento)!=EOF){ //mesmo que a anterior porem quando o grafo for direcionado
+    while(fscanf(p, "%i %i %i", &origem, &destino, &relacionamento)!=EOF){      //direcionado
         (*matrizDois)[origem-1][destino-1]= relacionamento;
         (*matrizDois)[destino-1][origem-1]= relacionamento;
-        *numArestaDois=(*numArestaDois)+(relacionamento);// conta numero de arestas para matriz incidencia
+        *numArestaDois=(*numArestaDois)+(relacionamento);                       //para matriz incidencia
         printf("aresta: %i \n", *numArestaDois);
     }
-
     printf("\nNúmero de Arestas Matriz Dois:%i \n \n", *numArestaDois);
-
-    for(i=0;i<*tamanhoDois;i++){ //percorre matriz e mostra
+    for(i=0;i<*tamanhoDois;i++){                                                //percorre matriz e mostra
         for(j=0;j<*tamanhoDois;j++){
             if((*matrizDois)[i][j]!= -10){
                 printf("%i ",(*matrizDois)[i][j]);
@@ -88,7 +78,7 @@ void GrauUm(int **matrizUm, int tamanhoUm, int *grauUm){
     printf("\nMatriz Um: \n");
     for(i=0;i<tamanhoUm;i++){
         for(j=0;j<tamanhoUm;j++){
-            if (matrizUm[i][j]!=0){ //no caso, nao eh direcionado, entao conta apenas a linha ou so coluna pois matriz eh simetrica
+            if (matrizUm[i][j]!=0){                                             //matriz é simetrica (nao direcionada) leio só uma linha
                 cont+=matrizUm[i][j];
                 grauUm[i]=cont;
             }
@@ -107,7 +97,7 @@ void GrauDois(int **matrizDois, int tamanhoDois, int *grauDois){
     printf("\nMatriz Dois: \n");
     for(i=0;i<tamanhoDois;i++){
         for(j=0;j<tamanhoDois;j++){
-            if (matrizDois[i][j]!=0){ //no caso, nao eh direcionado, entao conta apenas a linha ou so coluna pois matriz eh simetrica
+            if (matrizDois[i][j]!=0){                                           //matriz é simetrica (nao direcionada) leio só uma linha
                 cont+=matrizDois[i][j];
                 grauDois[i]=cont;
             }
@@ -134,7 +124,7 @@ void ComparaMatrizes(int *grauUm, int *grauDois, int tamanho){
                 if (grauUm[i] == grauDois[j]) {
                     visto[j] = 1;
                     combi++;
-                    break;               //começo o for novamente...
+                    break;                                                      //começo o for novamente...
                 }
             }
         }
@@ -149,10 +139,9 @@ void ComparaMatrizes(int *grauUm, int *grauDois, int tamanho){
 
 int main()
 {
+    setlocale(LC_ALL,"");
     int ***matrizUm=NULL, ***matrizDois=NULL;
     int tamanhoUm, tamanhoDois, numArestaUm, numArestaDois, tamanho;
-
-    setlocale(LC_ALL,"");
 
     criaMatrizUm(&matrizUm, &tamanhoUm, &numArestaUm);
     criaMatrizDois(&matrizDois, &tamanhoDois, &numArestaDois);

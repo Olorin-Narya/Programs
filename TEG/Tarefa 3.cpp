@@ -8,7 +8,7 @@ void criaMatriz(int ***matriz, int ***matrizInc, int *tamanho,int *numAresta){
 
     *numAresta = 0;
 
-    printf("Digite a quantidade de vertices:\n");
+    printf("Digite a quantidade de vértices:\n");
     scanf("%i",&vertices);
     *tamanho = vertices;
 
@@ -26,7 +26,7 @@ void criaMatriz(int ***matriz, int ***matrizInc, int *tamanho,int *numAresta){
         *numAresta = (*numAresta)+(aresta);
         printf("aresta: %i \n", *numAresta);
     }
-    printf("\nNumero de Arestas:%i \n \n", *numAresta);
+    printf("\nNúmero de Arestas:%i \n \n", *numAresta);
 
     (*matrizInc) = (int**)malloc(*numAresta * sizeof(int*));
 
@@ -77,20 +77,20 @@ void MostraAdjacencia(int **matriz, int tamanho){
 void GrauNaoDirecionado(int **matriz, int tamanho){
     int no, j, cont=0;
 
-    printf("Digite o no: \n");
+    printf("Digite o nó: \n");
     scanf("%i", &no);
     for(j=0;j<tamanho;j++){
         if (matriz[no-1][j]!=0){
             cont+=matriz[no-1][j];
         }
     }
-    printf("O grau do no %i eh: %i\n", no, cont);
+    printf("O grau do nó %i é: %i\n", no, cont);
 }
 
 void GrauDirecionado(int **matriz, int tamanho){
     int no, i, j, cont=0, cont2=0;
 
-    printf("Digite o no: \n");
+    printf("Digite o nó: \n");
     scanf("%i", &no);
 
     for(j=0;j<tamanho;j++){
@@ -105,7 +105,7 @@ void GrauDirecionado(int **matriz, int tamanho){
         }
     }
 
-    printf("O grau do no %i é: %i\n", no, cont+cont2);
+    printf("O grau do nó %i é: %i\n", no, cont+cont2);
 }
 
 void IncidenciaNaoDirecionada(int ***matrizInc ){
@@ -151,7 +151,7 @@ void IncidenciaDirecionada(int ***matrizInc){
 void ExcluiVertice(int **matriz, int tamanho){
     int vertice, j=0, x, y, relacionamento;
 
-    printf("Digite o vertice que deseja excluir: \n");
+    printf("Digite o vértice que deseja excluir: \n");
     scanf("%i", &vertice);
 
     FILE *p= fopen("oi.txt","r");
@@ -163,13 +163,13 @@ void ExcluiVertice(int **matriz, int tamanho){
     }
     /*
     for(j=0;j<tamanho;j++){
-            matriz[vertice][j]==-10;
+        matriz[vertice][j]==-10;
     }
 
     for(i=0;i<tamanho;i++){
         for(j=0;j<tamanho;j++){
             if(matriz[i][j]!= -10){
-                 printf("%i ",matriz[i][j]);
+                printf("%i ",matriz[i][j]);
             }
         }printf("\n");
     }*/
@@ -190,7 +190,7 @@ void Complemento(int **matriz, int tamanho){
 
     for(i = 0; i < tamanho; i++){
         for(j = 0; j < tamanho; j++){
-                printf("%i ", matriz[i][j]);
+            printf("%i ", matriz[i][j]);
         }
         printf("\n");
     }
@@ -221,12 +221,11 @@ void VerificaConexao(int **matriz, int numVertices) {
             Conexo (matriz, i, numVertices, visto);
         }
     }
-
     if (componentes == 0) {
-        printf("Eh conexo\n");
+        printf("É conexo\n");
     }
     else {
-        printf("Não eh conexo, possui %i componentes\n", componentes);
+        printf("Não é conexo, possui %i componentes\n", componentes);
     }
 }
 
@@ -237,7 +236,7 @@ int main(){
     int **matrizInc=NULL;
 
     setlocale(LC_ALL,"");
-    
+
     printf("O grafo é direcionado? 1= SIM\n");
     scanf("%i", &resposta);
     if(resposta==1){
@@ -247,7 +246,7 @@ int main(){
             scanf("\n%i",&escolha);
 
             switch(escolha){
-                case 1:
+                case 1: {
                     criaMatriz(&matriz, &matrizInc, &tamanho, &numAresta);
 
                     Direcionada(&matriz);
@@ -255,28 +254,24 @@ int main(){
 
                     printf("Matriz Adjacente: \n");
                     MostraAdjacencia(matriz, tamanho);
-                    printf("Matriz Incidencia: \n");
+                    printf("Matriz Incidência: \n");
                     MostraIncidencia(matrizInc, tamanho, numAresta);
-
+                }
                 break;
                 case 2:
                     GrauDirecionado(matriz, tamanho);
-
                 break;
                 case 3:
                     ExcluiVertice(matriz, tamanho);
-
                 break;
                 case 4:
                     Complemento(matriz, tamanho);
-
                 break;
                 case 5:
                     VerificaConexao(matriz, tamanho);
-
                 break;
                 default:
-                return 0;
+                    return 0;
                 break;
             }
         } while(escolha!=0);
@@ -287,7 +282,7 @@ int main(){
             scanf("%i",&escolha);
 
             switch(escolha){
-                case 1:
+                case 1: {
                     criaMatriz(&matriz, &matrizInc, &tamanho, &numAresta);
                     printf(">>>>>>>>>>>>>>>>%d\n", numAresta);
                     NaoDirecionada(&matriz);
@@ -297,43 +292,36 @@ int main(){
                     MostraAdjacencia(matriz, tamanho);
                     printf ("Matriz Incidencia: \n");
                     MostraIncidencia(matrizInc, tamanho, numAresta);
-
+                }
                 break;
                 case 2:
                     GrauNaoDirecionado(matriz, tamanho);
-
                 break;
                 case 3:
                     ExcluiVertice(matriz, tamanho);
-
                 break;
                 case 4:
                     Complemento(matriz, tamanho);
-
                 break;
-                case 5:;
+                case 5: {
                     FILE *v=fopen("verticeNovo.txt", "r");
                     FILE *p=fopen("oi.txt", "a");
-
                     char buffer[100];
                     //fseek(p,0,SEEK_END);
                     while(fgets(buffer, 100, v) != NULL){
                     //fprintf(p, buffer);
-
                         fputs(buffer,p);
                     //printf("%s", buffer);
                     }
-
                     fclose(p);
                     fclose(v);
-
+                }
                 break;
                 case 6:
                     VerificaConexao(matriz, tamanho);
-
                 break;
                 default:
-                return 0;
+                    return 0;
                 break;
             }
         }while(escolha!=0);

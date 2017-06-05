@@ -9,20 +9,20 @@ void criaMatriz(int ***matriz, int ***matrizModificada , int *tamanho,int *numAr
     scanf("%i",&vertices);
     *tamanho=vertices;
 
-    FILE *p=fopen("oi.txt", "r"); //abre arquivo
+    FILE *p=fopen("oi.txt", "r");
     *matriz=(int**)malloc(*tamanho * sizeof(int*));
     *matrizModificada=(int**)malloc(*tamanho * sizeof(int*));
 
     for(i=0;i<*tamanho;i++){
-        (*matriz)[i]= (int*) malloc(*tamanho*sizeof(int)); //cria matriz de adjacencia
-        (*matrizModificada)[i]= (int*)malloc(*tamanho*sizeof(int)); //cria matriz de adjacencia
+        (*matriz)[i]= (int*) malloc(*tamanho*sizeof(int));                      //cria matriz de adjacencia
+        (*matrizModificada)[i]= (int*)malloc(*tamanho*sizeof(int));             //cria matriz de adjacencia
         for(j=0;j<*tamanho;j++){
-            (*matriz)[i][j]=0;              //inicializa adjacencia
-            (*matrizModificada)[i][j]=0; //inicializa adjacencia
+            (*matriz)[i][j]=0;                                                  //inicializa adjacencia
+            (*matrizModificada)[i][j]=0;                                        //inicializa adjacencia
         }
     }
     while(fscanf(p, "%i %i %i #", &origem, &destino, &aresta)!=EOF){
-        *numAresta=(*numAresta)+(aresta);// conta numero de arestas para matriz incidencia
+        *numAresta=(*numAresta)+(aresta);                                       //Para matriz incidencia
         printf("aresta: %i \n", *numAresta);
     }
     printf("\nNúmero de Arestas:%i \n \n", *numAresta);
@@ -53,11 +53,10 @@ void MostraIncidencia(int **matrizInc, int tamanho, int numAresta){
 
 void GrauNaoDirecionado(int **matriz, int tamanho){
     int no, i, j, cont=0;
-
-    printf("Digite o nó: \n"); //mostra grau de no que o usuario digita
+    printf("Digite o nó: \n");                                                  //mostra grau de no que o usuario digita
     scanf("%i", &no);
         for(j=0;j<tamanho;j++){
-            if (matriz[no-1][j]!=0){ //no caso, nao eh direcionado, entao conta apenas a linha ou so coluna pois matriz eh simetrica
+            if (matriz[no-1][j]!=0){                                            //matriz é simetrica pois o grafo nao é direcionado
                 cont+=matriz[no-1][j];
             }
         }
@@ -68,7 +67,7 @@ void NaoDirecionada(int ***matriz){
     int i, j, x , y , relacionamento;
     FILE *p= fopen("oi.txt","r");
     while(fscanf(p, "%i %i %i", &x, &y, &relacionamento)!=EOF){
-        (*matriz)[x-1][y-1]= relacionamento; // atribui valor para posicoes enviadas no arquivo
+        (*matriz)[x-1][y-1]= relacionamento;                                    // atribui valor para posicoes enviadas pelo arquivo
         (*matriz)[y-1][x-1]= relacionamento;
     }
     fclose(p);
@@ -76,34 +75,18 @@ void NaoDirecionada(int ***matriz){
 
 void MostraAdjacencia(int **matriz, int tamanho){
     int i, j;
-    for(i=0;i<tamanho;i++){         //percorre matriz e mostra
+    for(i=0;i<tamanho;i++){
         for(j=0;j<tamanho;j++){
             if(matriz[i][j]!= -10){
-                 printf("%i ",matriz[i][j]);
+                printf("%i ",matriz[i][j]);
             }
-
-        }printf("\n");
+        }
+        printf("\n");
     }
 }
 
-int ParenteNo(int **matriz, int tamanho, int direcao, int pesquisaNo){
-    int i, componentes=0, visto[tamanho], no=0;
-
-    for(i = 0; i < tamanho; i++) {
-        visto[i] = 0;
-    }
-
-    printf("Digite a raiz:\n");
-    scanf("%i",&no);
-
-    visto[no-1]++; //raiz da arvore ja vai marcada, j� que comecamos por ela
-    printf(" %i |", no);
-    ProcuraNo(matriz, no-1, tamanho, visto, direcao, pesquisaNo);
-}
-
-void ProcuraNo(int **matriz, int verticeAnalisado, int tamanho, int visto[tamanho], int direcao, int pesquisaNo){ //
+void ProcuraNo(int **matriz, int verticeAnalisado, int tamanho, int * visto, int direcao, int pesquisaNo){ //
     int i;
-
     for(i = 0; i < tamanho; i++){
         if (matriz[verticeAnalisado][i] == 1){
             if (visto[i] == 0) {
@@ -121,23 +104,34 @@ void ProcuraNo(int **matriz, int verticeAnalisado, int tamanho, int visto[tamanh
     }
 }
 
+int ParenteNo(int **matriz, int tamanho, int direcao, int pesquisaNo){
+    int i, componentes=0, visto[tamanho], no=0;
+
+    for(i = 0; i < tamanho; i++) {
+        visto[i] = 0;
+    }
+    printf("Digite a raiz:\n");
+    scanf("%i",&no);
+
+    visto[no-1]++;                                                              //raiz da arvore ja marcada, começamos por ela
+    printf(" %i |", no);
+    ProcuraNo(matriz, no-1, tamanho, visto, direcao, pesquisaNo);
+}
+
 int main()
 {
-    int tamanho, i,j=0, escolha, resposta, origem, destino, numAresta=0, aresta, entra=0, entra2=0, direcao, pesquisaNo;
-
+    int tamanho, escolha, numAresta=0, direcao, pesquisaNo;
     int **matrizInc=NULL;
     int **matrizModificada=NULL;
     int **matriz=NULL;
-
     setlocale(LC_ALL, "");
-
     do{
         printf("\n1.Mostra Matriz \n2.Árvore\n3.Pesquisa\n0. Sair\n");
         printf("Opção: ");
         scanf("\n%i",&escolha);
 
         switch(escolha){
-            case 1:
+            case 1: {
                 criaMatriz(&matriz, &matrizModificada,&tamanho, &numAresta);
 
                 NaoDirecionada(&matriz);
@@ -146,17 +140,19 @@ int main()
                 printf("Matriz Adjacente: \n");
                 MostraAdjacencia(matriz, tamanho); printf("\n");
                 MostraAdjacencia(matrizModificada, tamanho);
+            }
             break;
             case 2:
-                ParenteNo(matriz, tamanho, 1);
+                ParenteNo(matriz, tamanho, 1, -1);                              //nunca encontrará o nó -1
             break;
-            case 3:
-                printf("Digite o ná à pesquisar");
+            case 3: {
+                printf("Digite o nó à pesquisar");
                 scanf("%i",&pesquisaNo);
 
                 printf("1  = filhos\n-1 = pais\n");
                 scanf("%i",&direcao);
                 ParenteNo(matriz,tamanho,direcao,pesquisaNo);
+            }
             break;
             default:
                 return 0;

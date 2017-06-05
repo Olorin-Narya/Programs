@@ -1,10 +1,3 @@
- /*
- * main.c
- *
- *  Created on: 21 de mai de 2017
- *      Author: mateus
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -194,50 +187,41 @@ void InsereVertice(int **matriz){
 }
 
 int main(){
-
     int tamanho, escolha, resposta, numAresta=0;
-
     setlocale(LC_ALL, "");
-    
+
     printf("O grafo é direcionado? 1= SIM\n");
-    
     scanf("%i", &resposta);
     int **matriz=NULL;
     int **matrizInc=NULL;
-    
+
     if(resposta==1){
         do{
             printf("\n1.Mostra Matrizes\n2.Grau do Nó\n3. Excluir Vértice\n4. Insere Vértice\n0. Sair\n");
             printf("Opção: ");
             scanf("\n%i",&escolha);
-
             switch(escolha){
-                case 1:
+                case 1: {
                     criaMatriz(&matriz, &matrizInc, &tamanho, &numAresta);
-
                     Direcionada(&matriz);
                     IncidenciaDirecionada(&matrizInc);
-
                     printf("Matriz Adjacente: \n");
                     MostraAdjacencia(matriz, tamanho);
                     printf("Matriz Incidência: \n");
                     MostraIncidencia(matrizInc, tamanho, numAresta);
-
+                }
                 break;
                 case 2:
                     GrauDirecionado(matriz, tamanho);
-
                 break;
                 case 3:
                     ExcluiVertice(matriz, &tamanho, &numAresta);
-
                 break;
                 case 4:
                     InsereVertice(matriz);
-
                 break;
                 default:
-                return 0;
+                    return 0;
                 break;
             }
         }while(escolha!=0);
@@ -248,7 +232,7 @@ int main(){
             scanf("%i",&escolha);
 
             switch(escolha){
-                case 1:
+                case 1: {
                     criaMatriz(&matriz, &matrizInc, &tamanho, &numAresta);
                     NaoDirecionada(&matriz);
                     IncidenciaNaoDirecionada(&matrizInc);
@@ -257,23 +241,19 @@ int main(){
                     MostraAdjacencia(matriz, tamanho);
                     printf ("Matriz Incidencia: \n");
                     MostraIncidencia(matrizInc, tamanho, numAresta);
-
+                }
                 break;
                 case 2:
                     GrauNaoDirecionado(matriz, tamanho);
-
                 break;
                 case 3:
                     ExcluiVertice(matriz, &tamanho, &numAresta);
-
                 break;
                 case 4:
                     InsereVertice(matriz);
-
                 break;
-
                 default:
-                return 0;
+                    return 0;
                 break;
             }
         }while(escolha!=0);
