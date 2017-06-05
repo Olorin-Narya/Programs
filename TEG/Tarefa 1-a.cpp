@@ -198,13 +198,16 @@ int main(){
     int tamanho, escolha, resposta, numAresta=0;
 
     setlocale(LC_ALL, "");
+    
     printf("O grafo é direcionado? 1= SIM\n");
+    
     scanf("%i", &resposta);
     int **matriz=NULL;
     int **matrizInc=NULL;
+    
     if(resposta==1){
         do{
-            printf("\n1.Mostra Matrizes\n2.Graú do Nó\n3. Excluir Vértice\n4. Insere Vértice\n0. Sair\n");
+            printf("\n1.Mostra Matrizes\n2.Grau do Nó\n3. Excluir Vértice\n4. Insere Vértice\n0. Sair\n");
             printf("Opção: ");
             scanf("\n%i",&escolha);
 
