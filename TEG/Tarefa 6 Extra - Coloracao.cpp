@@ -1,7 +1,9 @@
-#include<stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
  int matriz[6][6],percorridos[6];//G:adjacency matrix,x:colors
+ 
 void color(int k){
    int i,j;
    percorridos[k]=1;  //coloring vertex with color1
@@ -12,10 +14,10 @@ void color(int k){
 }
 
 int main(){
-  int vertices,arestas,i,j,k, valor, cont=1;
-
-
-  printf("Digite o numero de vertices : \n");
+    int vertices,arestas,i,j,k, valor, cont=1;
+    setlocale(LC_ALL,"");
+    
+    printf("Digite o numero de vertices : \n");
   scanf("%d",&vertices);  //total vertices
   printf("Digite o numero de arestas: \n");
   scanf("%d",&arestas);  //total edges
