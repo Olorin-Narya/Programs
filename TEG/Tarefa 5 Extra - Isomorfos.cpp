@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
 //conta  numero de arestas a partir do numero de relacionamento enviado no arquivo txt 3 coluna
 void criaMatrizUm(int ***matrizUm, int *tamanhoUm,int *numArestaUm){
@@ -117,7 +118,7 @@ void GrauDois(int **matrizDois, int tamanhoDois, int *grauDois){
                 grauDois[i]=cont;
             }
         }
-        printf("O grau do no %i eh: %i\n", i+1, cont);
+        printf("O grau do nó %i é: %i\n", i+1, cont);
         cont=0;
     }
     for(i=0;i<tamanhoDois;i++){
@@ -141,17 +142,17 @@ void ComparaMatrizes(int *grauUm, int *grauDois, int tamanho){
                 if (grauUm[i] == grauDois[j]) {
                     visto[j] = 1;
                     combi++;
-                    break;                              //come�o o for novamente...
+                    break;                              //começo o for novamente...
                 }
             }
         }
     }
 
     if (combi == tamanho) {
-        printf("Sao isomorfos!\n");
+        printf("São isomorfos!\n");
     }
     else {
-        printf("Nao sao isomorfos!\n");
+        printf("Nao são isomorfos!\n");
     }
 }
 
@@ -161,6 +162,9 @@ int main()
 
     int ***matrizUm=NULL, ***matrizDois=NULL;
     int tamanhoUm, tamanhoDois, numArestaUm, numArestaDois, tamanho;
+    
+    setlocale(LC_ALL,"");
+    
     criaMatrizUm(&matrizUm, &tamanhoUm, &numArestaUm);
     criaMatrizDois(&matrizDois, &tamanhoDois, &numArestaDois);
 
@@ -173,7 +177,7 @@ int main()
         ComparaMatrizes(grauUm, grauDois, tamanhoUm);
     }
     else {
-        printf("Nao sao isomorfos!\n");
+        printf("Nao são isomorfos!\n");
     }
     return 0;
 }
