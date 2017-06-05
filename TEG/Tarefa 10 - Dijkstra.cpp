@@ -1,3 +1,7 @@
+#include <stdlib>
+#include <stdio>
+#include <locale.h>
+
 int **matriz;
 int *dist;
 int *marcados;
@@ -69,19 +73,21 @@ int main()
 {
     int i,j, valor;
     int inicio=0, prox=0, vertices;
+    
+    setlocale(LC_ALL,"");
 
- printf("Digite a quantidade de vertices?\n");
- scanf("%d",&vertices);
+    printf("Digite a quantidade de vertices?\n");
+    scanf("%d",&vertices);
 
- printf("Qual o vertice inicial?\n");
- scanf("%d",&inicio);
+    printf("Qual o vertice inicial?\n");
+    scanf("%d",&inicio);
 
- matriz = malloc(sizeof(int*)*vertices);
- for(i=0;i<vertices;i++){
-  matriz[i]=malloc(sizeof(int)*vertices);
- }
+    matriz = malloc(sizeof(int*)*vertices);
+    for(i=0;i<vertices;i++){
+        matriz[i]=malloc(sizeof(int)*vertices);
+    }
 
-    printf("Digite os valores da matriz para cada posicao (0 se nao existir): \n");
+    printf("Digite os valores da matriz para cada posição (0 se não existir): \n");
     for(i=0;i<vertices;i++){
         for(j=0;j<vertices;j++){
             scanf("%d",&matriz[i][j]);
