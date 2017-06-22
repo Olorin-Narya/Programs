@@ -1,0 +1,10 @@
+before_install:
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get update -q
+  - sudo apt-get install gcc-7 -y
+env:
+  - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+         
+language: cpp
+compiler: gcc
+script: make -j4
