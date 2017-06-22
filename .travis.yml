@@ -1,3 +1,5 @@
+before_install:
+
 addons:
 	apt:
 		sources:
@@ -7,7 +9,7 @@ addons:
 env:
 	- MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 		 
-before_install:
+
 	- eval "${MATRIX_EVAL}"
 	
 language: cpp
