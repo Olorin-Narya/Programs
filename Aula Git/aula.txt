@@ -20,6 +20,9 @@ git status
 git add -u
 //atualizar as modificacoes (update e delete).
 
+git add *.*
+//adiciona todos os arquivos com alguma extensao, entao, somente os arquivos da pasta atual (diretorios nao tem extensao)
+
 git rm nomedoarquivo.txt
 //deletar um arquivo
 git commit -m 'precisa escrever para deletar tbm'
