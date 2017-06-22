@@ -1,5 +1,3 @@
-# works on Precise and Trusty
-- os: linux
 addons:
 	apt:
 		sources:
