@@ -1,10 +1,18 @@
+matrix:
+	include:
+    	# works on Precise and Trusty
+    	- os: linux
+      	addons:
+        	apt:
+          		sources:
+            		- ubuntu-toolchain-r-test
+         		packages:
+            		- g++-7
+   		env:
+         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+		 
 before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get update -q
-  - sudo apt-get install gcc-7 -y
-env:
-  - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-         
+  	- eval "${MATRIX_EVAL}"
 language: cpp
 compiler: gcc
 script: make -j4
