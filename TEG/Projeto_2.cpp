@@ -57,7 +57,7 @@ int menor(int *dist, int *marcados, int vertices){
 
 int main() {
     setlocale(LC_ALL, "");
-    int i, j,k, vertices = 15;
+    int i, j, k, h, vertices = 15;
     int matriz[vertices][vertices] = {
     // 0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
     {000, 10,  5, 10, 13,  8, 15, 16, 10,  3,  9,  4,  3,  3,  5}, // 0
@@ -142,16 +142,21 @@ int main() {
 				AtualCargaPulverizar -= peso[caminhos[i][j]];
 			else
 			{
-				for (k = tamCaminho-1; k > j; k--)
+				h = j;
+				while (h > 0)
 				{
-					caminhos[i][k] = caminhos[i][k-1];
+					for (k = tamCaminho-1; k > j; k--)
+					{
+						caminhos[i][k] = caminhos[i][k-1];
+					}
+					h--;
 				}
 				caminhos[i][j] = inicio;
 				AtualCargaPulverizar = MaxPulverizar;
 			}
 
 		}
-		printf(" %d\n", i);
+		AtualCargaPulverizar = MaxPulverizar;
 	}
 
 	for(i = 0; i < vertices; i++)
