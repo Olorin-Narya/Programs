@@ -160,9 +160,6 @@ void Fleury(int **matriz, int **matrizModificada, int numAresta, int tamanho){
             }
         }
         contador++;
-        //printf("\n");
-        //MostraAdjacencia(matrizModificada, tamanho);
-        //printf("\n");
 
         if (contador > numAresta*tamanho) {
             printf("Nao há um circuito Euleriano");
@@ -185,7 +182,6 @@ void Fleury(int **matriz, int **matrizModificada, int numAresta, int tamanho){
 int main()
 {
     int tamanho, escolha, numAresta=0;
-    int **matrizInc=NULL;
     int **matrizModificada=NULL;
     int **matriz=NULL;
     setlocale(LC_ALL, "");

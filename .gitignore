@@ -1,0 +1,15 @@
+/*/
+/TEG/Teste/*
+/TEG/TEG/*
+/PRA/PRA */*
+/PRA/Aulas/*
+/PRA/Projeto de Arquivos/*
+*.pdf
+*.gslides
+*.gdoc
+*.pptx
+*.ppt
+*.png
+*.jpg
+!/TEG/
+!/PRA/
