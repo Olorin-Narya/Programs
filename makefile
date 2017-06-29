@@ -5,7 +5,7 @@
 
 # CXX=g++-7 already set on travis
 
-CXXFLAGS=-Wall -fmax-errors=0
+CXXFLAGS= -Wno-error -Wall -fmax-errors=0
 TEG= $(wildcard ./TEG/*.cpp)
 OTEG= $(TEG:.cpp=.o)
 all: $(OTEG)
