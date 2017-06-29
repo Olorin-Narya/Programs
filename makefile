@@ -3,7 +3,8 @@
 # Really, this explanation in portuguese is wonderful. I can't found an equivalent in english. ;(
 # but I explain what I used here in english o/
 
-CC=g++-7
+# CXX=g++-7 already set on travis
+
 CXXFLAGS=-Wall -fmax-errors=0
 TEG= $(wildcard ./TEG/*.cpp)
 OTEG= $(TEG:.cpp=.o)
@@ -17,7 +18,7 @@ all: $(OTEG)
 # $< name of the first dependency (%.c)
 
 %.o: %.cpp
-	$(CC) -o $@ -c $^ $(CXXFLAGS)
+	$(CXX) -o $@ -c $^ $(CXXFLAGS)
 
 clean:
 	@rm -rf ./TEG/*.o
