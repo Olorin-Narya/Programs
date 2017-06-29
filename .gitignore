@@ -1,17 +1,47 @@
 /*/
+
 TEG/Teste/
+
 TEG/pdf/
+
 TEG/TEG/
+
 PRA/Aulas/
+
 PRA/PRA - UDESC - 2017/
+
 PRA/Projeto de Arquivos/
+
 *.pdf
+
 *.gslides
+
 *.gdoc
+
 *.pptx
+
 *.ppt
+
 *.png
+
 *.jpg
+
 !/TEG/
+
 !/PRA/
+
 !/LMA/
+
+PRA/Aulas/
+
+PRA/PRA - UDESC - 2017/
+
+PRA/Projeto de Arquivos/
+
+LMA/provas_diversas_LMA/
+
+TEG/TEG/
+
+TEG/Teste/
+
+TEG/pdf/

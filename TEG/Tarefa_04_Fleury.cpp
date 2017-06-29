@@ -32,7 +32,7 @@ void criaMatriz(int ***matriz, int ***matrizModificada , int *tamanho,int *numAr
 }
 
 void IncidenciaNaoDirecionada(int ***matrizInc ){
-    int destino, origem,  arestas, i=0;
+    int destino, origem,  arestas;
     FILE *a= fopen("oi.txt","r");
     while(fscanf(a, "%i %i  %i \n ", &origem, &destino, &arestas)!= EOF){
         (*matrizInc)[i][origem-1]= 1;

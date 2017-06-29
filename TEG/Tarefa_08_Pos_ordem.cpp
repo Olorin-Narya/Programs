@@ -4,7 +4,7 @@
 #include <locale.h>
 
 void criaMatriz(int ***matriz, int *numAresta, int *vertices){
-    int i, j, origem, destino, vertice,aresta, raiz, esq, dir;
+    int i, j, vertice, raiz, esq, dir;
     FILE *p=fopen("grafo.txt", "r");
     *numAresta=0;                                                               //Número de relacionamentos (3ª coluna)
     printf("Digite a quantidade de vértices:\n");
@@ -28,7 +28,7 @@ void criaMatriz(int ***matriz, int *numAresta, int *vertices){
 }
 
 void mostraMatriz(int **matriz, int vertices){
-    int i, j , raiz , esq , dir;
+    int i, j;
     for(i=0;i<vertices;i++){
         for(j=0;j<2;j++){
             printf("%i ",matriz[i][j]);
@@ -53,22 +53,21 @@ void preOrdem(int **matriz,int *ultimo, int *i, int *pai, int vertices){ //raiz 
             //printf(" ultimo %i | ", *ultimo);
             preOrdem(matriz, ultimo, i, pai, vertices);
 
-            }else{//nao tem nenhum filho
-                //pai[*i]=NULL;
-                //(*i)--;
-                //printf(" i modificado: %i\n", *i);
-                *ultimo=(pai)[(*i)--];
-                //printf (">>>>>>>>>>>> i %i\n", *i);
-                //printf (">>>>>>>>>>>>  ultimo %i\n", *ultimo);
-                // printf (">>>>>>>>>>>> pai %i\n", pai[*i]);
-                if((matriz)[*ultimo][1]!=0){//tem o filho na direita
-                    (*i)++;
-                    pai[*i]=(matriz)[*ultimo][1];
-                    *ultimo=(matriz)[*ultimo][1];
-                    preOrdem(matriz, ultimo, i, pai, vertices);
-                }else{
-                    return ;
-                }
+        }else{//nao tem nenhum filho
+            //pai[*i]=NULL;
+            //(*i)--;
+            //printf(" i modificado: %i\n", *i);
+            *ultimo=(pai)[(*i)--];
+            //printf (">>>>>>>>>>>> i %i\n", *i);
+            //printf (">>>>>>>>>>>>  ultimo %i\n", *ultimo);
+            // printf (">>>>>>>>>>>> pai %i\n", pai[*i]);
+            if((matriz)[*ultimo][1]!=0){//tem o filho na direita
+                (*i)++;
+                pai[*i]=(matriz)[*ultimo][1];
+                *ultimo=(matriz)[*ultimo][1];
+                preOrdem(matriz, ultimo, i, pai, vertices);
+            }else{
+                return ;
             }
         }
     }
@@ -82,7 +81,7 @@ void posOrdem(){
 
 void simetrico(){}
  //esq raiz dir
-
+ 
 
 int main()
 {

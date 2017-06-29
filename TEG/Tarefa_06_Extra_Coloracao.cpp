@@ -5,7 +5,7 @@
 int matriz[6][6],percorridos[6]; //G:adjacency matrix,x:colors
 
 void color(int k){
-    int i,j;
+    int i;
     percorridos[k]=1;  //coloring vertex with color1
     for(i=0;i<k;i++){ //checking all k-1 vertices-backtracking
         if(matriz[i][k]!=0 && percorridos[k]==percorridos[i])  //if connected and has same color
@@ -14,7 +14,7 @@ void color(int k){
 }
 
 int main(){
-    int vertices,arestas,i,j,k, valor, cont=1;
+    int vertices,arestas,i,j, valor, cont=1;
     setlocale(LC_ALL,"");
 
     printf("Digite o número de vértices : \n");

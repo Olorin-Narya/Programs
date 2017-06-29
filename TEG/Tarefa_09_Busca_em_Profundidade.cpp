@@ -30,7 +30,7 @@ void criaMatriz(int ***matriz, int ***matrizModificada , int *tamanho,int *numAr
 }
 
 void IncidenciaNaoDirecionada(int ***matrizInc ){
-    int destino, origem,  arestas, i=0, j;
+    int destino, origem,  arestas, i=0;
     FILE *a= fopen("oi.txt","r");
     while(fscanf(a, "%i %i  %i \n ", &origem, &destino, &arestas)!= EOF){
         (*matrizInc)[i][origem-1]= 1;
@@ -52,7 +52,7 @@ void MostraIncidencia(int **matrizInc, int tamanho, int numAresta){
 }
 
 void GrauNaoDirecionado(int **matriz, int tamanho){
-    int no, i, j, cont=0;
+    int no, j, cont=0;
     printf("Digite o nó: \n");                                                  //mostra grau de no que o usuario digita
     scanf("%i", &no);
         for(j=0;j<tamanho;j++){
@@ -64,7 +64,7 @@ void GrauNaoDirecionado(int **matriz, int tamanho){
 }
 
 void NaoDirecionada(int ***matriz){
-    int i, j, x , y , relacionamento;
+    int x , y , relacionamento;
     FILE *p= fopen("oi.txt","r");
     while(fscanf(p, "%i %i %i", &x, &y, &relacionamento)!=EOF){
         (*matriz)[x-1][y-1]= relacionamento;                                    // atribui valor para posicoes enviadas pelo arquivo
@@ -104,8 +104,8 @@ void ProcuraNo(int **matriz, int verticeAnalisado, int tamanho, int * visto, int
     }
 }
 
-int ParenteNo(int **matriz, int tamanho, int direcao, int pesquisaNo){
-    int i, componentes=0, visto[tamanho], no=0;
+void ParenteNo(int **matriz, int tamanho, int direcao, int pesquisaNo){
+    int i, visto[tamanho], no=0;
 
     for(i = 0; i < tamanho; i++) {
         visto[i] = 0;
@@ -121,7 +121,6 @@ int ParenteNo(int **matriz, int tamanho, int direcao, int pesquisaNo){
 int main()
 {
     int tamanho, escolha, numAresta=0, direcao, pesquisaNo;
-    int **matrizInc=NULL;
     int **matrizModificada=NULL;
     int **matriz=NULL;
     setlocale(LC_ALL, "");

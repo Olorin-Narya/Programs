@@ -141,13 +141,13 @@ int main()
 {
     setlocale(LC_ALL,"");
     int ***matrizUm=NULL, ***matrizDois=NULL;
-    int tamanhoUm, tamanhoDois, numArestaUm, numArestaDois, tamanho;
+    int tamanhoUm, tamanhoDois, numArestaUm, numArestaDois;
 
     criaMatrizUm(&matrizUm, &tamanhoUm, &numArestaUm);
     criaMatrizDois(&matrizDois, &tamanhoDois, &numArestaDois);
 
     if ((tamanhoUm == tamanhoDois) && (numArestaUm == numArestaDois)) {
-        int *grauUm[tamanhoUm], *grauDois[tamanhoUm];
+        int grauUm[tamanhoUm], grauDois[tamanhoUm];
 
         GrauUm(matrizUm, tamanhoUm, grauUm);
         GrauDois(matrizDois, tamanhoUm, grauDois);

@@ -13,11 +13,7 @@ int d;
 int inicio;
 int vertices;
 
-
-
-
-
-int menor(vertices){
+int menor(int vertices){
     int i,menor=-1,d=10000000;
 
     for(i=0;i<vertices;i++){
@@ -36,7 +32,7 @@ int menor(vertices){
 
 
 void Dijkstra(int inicio, int vertices){
-    int i,j,atual;
+    int i,atual;
     //definindo destino como ultimo vertice
     destino=vertices-1;
     dist=malloc(sizeof(int)*vertices);
@@ -56,8 +52,6 @@ void Dijkstra(int inicio, int vertices){
         else{
             dist[i]=matriz[inicio][i];
             precedentes[i]=0; // se inicializados com valor da matriz, mostrar o zero
-
-
         }
     }
 
@@ -98,9 +92,8 @@ void Dijkstra(int inicio, int vertices){
 
 void DijkstraDois(int inicio, int vertices){
     //printf(">>>>>>>> O D EH: %i\n", d);
-    int i,j,atual;
+    int i,atual;
     destino=vertices-1;
-
 
     dist=malloc(sizeof(int)*vertices);
     marcados=malloc(sizeof(int)*vertices);
@@ -109,7 +102,6 @@ void DijkstraDois(int inicio, int vertices){
     dist[inicio]=0;
     marcados[inicio]=1;
     precedentes[inicio]=0;
-
 
     for(i=1;i<vertices;i++){
         marcados[i]=0;
@@ -120,17 +112,13 @@ void DijkstraDois(int inicio, int vertices){
         else{
             dist[i]=matriz[inicio][i];
             precedentes[i]=0; // se inicializados com valor da matriz, mostrar o zero
-
         }
     }
-
     /*
-       for(i=0;i<vertices;i++){
-       printf("DIST[%d]= %d\n",i,dist[i]);
-       }
-       */
-
-
+    for(i=0;i<vertices;i++){
+    printf("DIST[%d]= %d\n",i,dist[i]);
+    }
+    */
     while(menor(vertices)!=-1){
         atual=menor(vertices);
         //printf("EM %d:\n",atual);
@@ -168,11 +156,8 @@ int main(){
         return 1;
     }
 
-
-
     //printf("Digite a quantidade de vertices?\n");
     //scanf("%d",&vertices);
-
 
     fscanf(p, "%i %i", &vertices, &x);
     matriz = malloc(sizeof(int*)*vertices);
@@ -203,7 +188,6 @@ int main(){
 
     Dijkstra(inicio, vertices);
 
-
     //printf("IMPRIMINDO O VETOR DE DISTANCIAS  A PARTIR DE %d:\n",inicio);
     for(i=0;i<vertices;i++){
         printf("Distancia[%d]: %d\n",i,dist[i]);
@@ -213,34 +197,26 @@ int main(){
     for(i=0;i<vertices;i++){
         printf("Precedente[%d]: %d\n",i,precedentes[i]);
     }
-
-
     printf("\n\n");
-
     /*
-       printf("MATRIZ BONITINHA DEPOIS DO DIJKSTRA\n");
-       for(i=0;i<vertices;i++){
-       for(j=0;j<vertices;j++){
-       printf(" %i", matriz[i][j]);
-       }
-       printf("\n");
-       }*/
-
-
-
+    printf("MATRIZ BONITINHA DEPOIS DO DIJKSTRA\n");
+    for(i=0;i<vertices;i++){
+    for(j=0;j<vertices;j++){
+    printf(" %i", matriz[i][j]);
+    }
+    printf("\n");
+    }*/
 
     DijkstraDois(inicio, vertices);
     if(minimo==novoMinimo){
         DijkstraDois(inicio, vertices);
     }
 
-
     if(dist[d]==0){
         printf(" -1 \n") ;
     }else{
         printf("O valor quase menor caminho eh: %i", dist[d]);
     }
-
 
     return 0;
 }
