@@ -81,14 +81,14 @@ void posOrdem(){
 
 void simetrico(){}
  //esq raiz dir
- 
+
 
 int main()
 {
     setlocale(LC_ALL, "");
-    int vertices, escolha, numAresta=0;
+    int vertices, escolha, *ultimo=0, *i=0, numAresta=0;
     int **matriz=NULL;
-    int *pai[10];
+    int pai[10];
     pai[0]=0;
     do{
         printf("\n1.Pré Ordem \n2.Simetrica\n3.Pós Ordem\n0. Sair\n");
@@ -98,7 +98,7 @@ int main()
             case 1: {
                 criaMatriz(&matriz, &numAresta, &vertices);
                 mostraMatriz(matriz, vertices);
-                preOrdem(matriz,&ultimo, &i, &pai, vertices);
+                preOrdem(matriz, ultimo, i, pai, vertices);
             }
             break;
             case 2:

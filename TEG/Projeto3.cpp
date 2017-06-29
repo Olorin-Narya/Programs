@@ -35,9 +35,9 @@ void Dijkstra(int inicio, int vertices){
     int i,atual;
     //definindo destino como ultimo vertice
     destino=vertices-1;
-    dist=malloc(sizeof(int)*vertices);
-    marcados=malloc(sizeof(int)*vertices);
-    precedentes= malloc(sizeof(int)*vertices);
+    dist= (int *) malloc(sizeof(int)*vertices);
+    marcados= (int *) malloc(sizeof(int)*vertices);
+    precedentes= (int *) malloc(sizeof(int)*vertices);
 
     dist[inicio]=0;
     marcados[inicio]=1;
@@ -95,9 +95,9 @@ void DijkstraDois(int inicio, int vertices){
     int i,atual;
     destino=vertices-1;
 
-    dist=malloc(sizeof(int)*vertices);
-    marcados=malloc(sizeof(int)*vertices);
-    precedentes= malloc(sizeof(int)*vertices);
+    dist= (int *) malloc(sizeof(int)*vertices);
+    marcados= (int *) malloc(sizeof(int)*vertices);
+    precedentes= (int *)  malloc(sizeof(int)*vertices);
 
     dist[inicio]=0;
     marcados[inicio]=1;
@@ -147,8 +147,8 @@ void DijkstraDois(int inicio, int vertices){
 
 int main(){
 
-    int i,j, valor;
-    int inicio=0, prox=0, vertices, linha, coluna,peso, x;
+    int i,j;
+    int inicio=0, vertices, linha, coluna,peso, x;
     FILE *p=fopen("oi.txt", "r");
 
     if( !p ) {
@@ -160,9 +160,9 @@ int main(){
     //scanf("%d",&vertices);
 
     fscanf(p, "%i %i", &vertices, &x);
-    matriz = malloc(sizeof(int*)*vertices);
+    matriz = (int **) malloc(sizeof(int*)*vertices);
     for(i=0;i<vertices;i++){
-        matriz[i]=malloc(sizeof(int)*vertices);
+        matriz[i]= (int *) malloc(sizeof(int)*vertices);
     }
     //printf("Digite os valores da matriz para cada posicao (0 se nao existir): \n");
     for(i=0;i<vertices;i++){

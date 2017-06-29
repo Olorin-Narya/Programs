@@ -3,7 +3,7 @@
 #include <string.h>
 
 void criaMatriz(int ***matriz, int *numAresta, int *vertices, int *tamanho){
-    int i, j, origem, destino, vertice,aresta, raiz, esq, dir;
+    int i, j, vertice, raiz, esq, dir;
     *numAresta=0; //conta  numero de arestas a partir do numero de relacionamento enviado no arquivo txt 3 coluna
 
     printf("Digite a quantidade de vertices:\n");
@@ -33,7 +33,7 @@ void criaMatriz(int ***matriz, int *numAresta, int *vertices, int *tamanho){
 }
 
 void mostraMatriz(int **matriz, int vertices){
-    int i, j , raiz , esq , dir;
+    int i, j;
     //printf (">> mostra\n");
     //printf (">> mostra  %i vertices\n", vertices);
     //FILE *p= fopen("grafo.txt","r");
@@ -49,7 +49,7 @@ void mostraMatriz(int **matriz, int vertices){
 //     fclose(p);
 }
 
-void preOrdem(int **matriz,int *ultimo, int *i, int *pai, int vertices, int *tamanho){ //raiz esq dir
+int preOrdem(int **matriz,int *ultimo, int *i, int *pai, int vertices, int *tamanho){ //raiz esq dir
     int j;
      //printando a raiz principal
     printf("%i | ", *ultimo);
@@ -87,14 +87,13 @@ void preOrdem(int **matriz,int *ultimo, int *i, int *pai, int vertices, int *tam
             }
         }
         *tamanho=vertices;
-        //return 1;
     }
+    return 0;
 }
 
-void posOrdem(int **matriz, int *i, int *tamVet, int *percorrido, int *tamanho, int vertices, int *t){
+void posOrdem(int **matriz, int *i, int *tamVet, int *percorrido, int *tamanho, int vertices, int * t){
     //esq dir raiz
     //printf(">> pos\n");
-    int j, k;
 
     if(matriz[*i][0]!=0){ //percorrendo filhos da esq
         // printf("   t %i\n", *t);
@@ -135,11 +134,11 @@ void simetrico(){
 
 int main()
 {
-    int *pai[10], *percorrido, tamVet=0;
+    int pai[10], *percorrido, tamVet=0;
     pai[0]=0;
     int **matriz=NULL;
-    int vertices, i=0,j, escolha, ultimo=0, origem, destino, numAresta=0, aresta, entra=0, entra2=0, tamanho, t=0;
-    (percorrido)= malloc(10*sizeof(int));
+    int vertices, *i=0, escolha, ultimo=0, numAresta=0, tamanho, *t=0;
+    (percorrido)= (int *) malloc(10*sizeof(int));
     do{
         printf("\n1.Pre Ordem \n2.Simetrica\n3.Pos Ordem\n0. Sair\n");
         printf("Opcao: ");
@@ -149,7 +148,7 @@ int main()
             case 1:
                 criaMatriz(&matriz, &numAresta, &vertices, &tamanho);
                 mostraMatriz(matriz, vertices);
-                preOrdem(matriz,&ultimo, &i, &pai, vertices, &tamanho);
+                preOrdem(matriz, &ultimo, i, pai, vertices, &tamanho);
             break;
             case 2:
                 criaMatriz(&matriz, &numAresta, &vertices, &tamanho);
@@ -157,7 +156,7 @@ int main()
             break;
             case 3:
                 criaMatriz(&matriz, &numAresta, &vertices, &tamanho);
-                posOrdem(matriz, &i, &tamVet, &percorrido, &tamanho, vertices, &t);
+                posOrdem(matriz, i, &tamVet, percorrido, &tamanho, vertices, t);
             break;
             default:
                 return 0;

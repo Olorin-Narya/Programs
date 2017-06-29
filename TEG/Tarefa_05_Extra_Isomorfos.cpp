@@ -3,33 +3,33 @@
 #include <locale.h>
 
 //conta  numero de arestas a partir do numero de relacionamento enviado no arquivo txt 3 coluna
-void criaMatrizUm(int ***matrizUm, int *tamanhoUm,int *numArestaUm){
-    int i, j, origem, destino, relacionamento, verticesUm, x,y;
+void criaMatrizUm(int **matrizUm, int *tamanhoUm,int *numArestaUm){
+    int i, j, origem, destino, relacionamento, verticesUm;
     *numArestaUm=0;
     FILE *p=fopen("oi1.txt", "r+");
     printf("Digite a quantidade de vértices:  ");
     scanf("%i",&verticesUm);
     *tamanhoUm=verticesUm;
     printf("\n");
-    *matrizUm=(int**)malloc(*tamanhoUm * sizeof(int*));
+    matrizUm=(int**)malloc(*tamanhoUm * sizeof(int*));
 
     for(i=0;i<*tamanhoUm;i++){
-        (*matrizUm)[i]= (int*) malloc(*tamanhoUm*sizeof(int));                  //cria matriz de adjacencia
+        matrizUm[i]= (int*) malloc(*tamanhoUm*sizeof(int));                  //cria matriz de adjacencia
         for(j=0;j<*tamanhoUm;j++){
-            (*matrizUm)[i][j]=0;                                                //inicializa adjacencia
+            matrizUm[i][j]=0;                                                //inicializa adjacencia
         }
     }
     while(fscanf(p, "%i %i %i", &origem, &destino, &relacionamento)!=EOF){      //mesmo que a anterior porem quando o grafo for direcionado
-        (*matrizUm)[origem-1][destino-1]= relacionamento;
-        (*matrizUm)[destino-1][origem-1]= relacionamento;
+        matrizUm[origem-1][destino-1]= relacionamento;
+        matrizUm[destino-1][origem-1]= relacionamento;
         *numArestaUm=(*numArestaUm)+(relacionamento);                           //conta numero de arestas para matriz incidencia
         printf("aresta: %i \n", *numArestaUm);
     }
     printf("\nNúmero de Arestas Matriz Um:%i \n \n", *numArestaUm);
     for(i=0;i<*tamanhoUm;i++){                                                  //percorre matriz e mostra
         for(j=0;j<*tamanhoUm;j++){
-            if((*matrizUm)[i][j]!= -10){
-                printf("%i ",(*matrizUm)[i][j]);
+            if(matrizUm[i][j]!= -10){
+                printf("%i ",matrizUm[i][j]);
             }
         }
         printf("\n");
@@ -37,7 +37,7 @@ void criaMatrizUm(int ***matrizUm, int *tamanhoUm,int *numArestaUm){
     fclose(p);
 }
 
-void criaMatrizDois(int ***matrizDois, int *tamanhoDois,int *numArestaDois){
+void criaMatrizDois(int **matrizDois, int *tamanhoDois,int *numArestaDois){
     int i, j, origem, destino, verticesDois, relacionamento;
     FILE *p=fopen("oi2.txt", "r");
     *numArestaDois=0;                                                           //Número de relacionamentos 3ª coluna
@@ -46,25 +46,25 @@ void criaMatrizDois(int ***matrizDois, int *tamanhoDois,int *numArestaDois){
     *tamanhoDois=verticesDois;
     printf("\n");
 
-    *matrizDois=(int**)malloc(*tamanhoDois * sizeof(int*));
+    matrizDois=(int**)malloc(*tamanhoDois * sizeof(int*));
 
     for(i=0;i<*tamanhoDois;i++){
-        (*matrizDois)[i]= (int*) malloc(*tamanhoDois*sizeof(int));              //cria matriz de adjacencia
+        matrizDois[i]= (int*) malloc(*tamanhoDois*sizeof(int));              //cria matriz de adjacencia
         for(j=0;j<*tamanhoDois;j++){
-            (*matrizDois)[i][j]=0;                                              //inicializa adjacencia
+            matrizDois[i][j]=0;                                              //inicializa adjacencia
         }
     }
     while(fscanf(p, "%i %i %i", &origem, &destino, &relacionamento)!=EOF){      //direcionado
-        (*matrizDois)[origem-1][destino-1]= relacionamento;
-        (*matrizDois)[destino-1][origem-1]= relacionamento;
+        matrizDois[origem-1][destino-1]= relacionamento;
+        matrizDois[destino-1][origem-1]= relacionamento;
         *numArestaDois=(*numArestaDois)+(relacionamento);                       //para matriz incidencia
         printf("aresta: %i \n", *numArestaDois);
     }
     printf("\nNúmero de Arestas Matriz Dois:%i \n \n", *numArestaDois);
     for(i=0;i<*tamanhoDois;i++){                                                //percorre matriz e mostra
         for(j=0;j<*tamanhoDois;j++){
-            if((*matrizDois)[i][j]!= -10){
-                printf("%i ",(*matrizDois)[i][j]);
+            if(matrizDois[i][j]!= -10){
+                printf("%i ",matrizDois[i][j]);
             }
         }
         printf("\n");
@@ -140,7 +140,7 @@ void ComparaMatrizes(int *grauUm, int *grauDois, int tamanho){
 int main()
 {
     setlocale(LC_ALL,"");
-    int ***matrizUm=NULL, ***matrizDois=NULL;
+    int **matrizUm=NULL, **matrizDois=NULL;
     int tamanhoUm, tamanhoDois, numArestaUm, numArestaDois;
 
     criaMatrizUm(matrizUm, &tamanhoUm, &numArestaUm);
