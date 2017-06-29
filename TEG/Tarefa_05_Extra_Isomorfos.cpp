@@ -143,8 +143,8 @@ int main()
     int ***matrizUm=NULL, ***matrizDois=NULL;
     int tamanhoUm, tamanhoDois, numArestaUm, numArestaDois;
 
-    criaMatrizUm(&matrizUm, &tamanhoUm, &numArestaUm);
-    criaMatrizDois(&matrizDois, &tamanhoDois, &numArestaDois);
+    criaMatrizUm(matrizUm, &tamanhoUm, &numArestaUm);
+    criaMatrizDois(matrizDois, &tamanhoDois, &numArestaDois);
 
     if ((tamanhoUm == tamanhoDois) && (numArestaUm == numArestaDois)) {
         int grauUm[tamanhoUm], grauDois[tamanhoUm];
