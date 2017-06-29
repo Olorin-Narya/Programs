@@ -3,7 +3,7 @@
 # Really, this explanation in portuguese is wonderful. I can't found an equivalent in english. ;(
 # but I explain what I used here in english o/
 
-CC=g++
+CC=g++-7
 CXXFLAGS=-Wall -fmax-errors=0
 TEG= $(wildcard ./TEG/*.cpp)
 OTEG= $(TEG:.cpp=.o)
