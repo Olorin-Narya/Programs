@@ -1,0 +1,34 @@
+imp_ast(0) => true. %aterramento
+imp_ast(N) => N > 0,
+              printf("*"),
+              Aux  =  (N - 1),
+              imp_ast(Aux).
+
+imp_spc(0) => true. %aterramento
+imp_spc(N) => N>0,
+			  printf(" "),
+			  Aux = (N - 1),
+			  imp_spc(Aux).
+
+%imp_tri(0) ?=> true. %%% ATERRAMENTO 
+
+imp_tri(Linha, Cont) =>
+        (Linha>0),
+        imp_spc(Cont),
+        imp_ast(Linha),
+        imp_spc(Cont),
+        nl,
+        Aux = Linha - 2,
+        Aux2 = Cont + 1,
+        imp_tri(Aux, Aux2).
+
+triang_2(X) => imp_tri(X,0).
+
+main ?=>
+        %imp_spc(1).
+		triang_2(7), nl.
+		%imp_ast(7), nl.
+		
+
+main => true.
+

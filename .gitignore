@@ -1,5 +1,11 @@
 /*/
 
+!/TEG/
+
+!/PRA/
+
+!/LMA/
+
 TEG/Teste/
 
 TEG/pdf/
@@ -11,6 +17,10 @@ PRA/Aulas/
 PRA/PRA - UDESC - 2017/
 
 PRA/Projeto de Arquivos/
+
+LMA/provas_diversas_LMA/
+
+PRA/Scraper/http:_www\.yahii\.com\.br_dolardiario85\.html
 
 *.pdf
 
@@ -26,24 +36,4 @@ PRA/Projeto de Arquivos/
 
 *.jpg
 
-!/TEG/
-
-!/PRA/
-
-!/LMA/
-
-PRA/Aulas/
-
-PRA/PRA - UDESC - 2017/
-
-PRA/Projeto de Arquivos/
-
-LMA/provas_diversas_LMA/
-
-TEG/TEG/
-
-TEG/Teste/
-
-TEG/pdf/
-
-PRA/Scraper/http:_www\.yahii\.com\.br_dolardiario85\.html
+*.ini

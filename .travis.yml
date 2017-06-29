@@ -8,4 +8,5 @@ addons:
         - gcc-7
 env:
     - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+script: make clean
 script: make -j4 -k
