@@ -9,8 +9,4 @@ addons:
 env:
     - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 language: cpp
-compiler: gcc
 script: make -j4 -k
-language: cpp
-compiler: gcc
-script: make -k -j4
